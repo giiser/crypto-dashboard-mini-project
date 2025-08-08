@@ -14,7 +14,9 @@ const App = () => {
         const fetchCoins = async () => {
             try{
                const response = await fetch(`${API_URL}?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false`);
-               if (!response.ok) throw new Error('Could not fetch coins');
+               if (!response.ok) {
+                   throw new Error('Could not fetch coins')
+               }
                const data = await response.json();
                setCoins(data);
             } catch(err){
