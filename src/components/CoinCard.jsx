@@ -11,12 +11,12 @@ const CoinCard = ({coin}) => {
                         <p className="symbol">{coin.symbol.toUpperCase()}</p>
                     </div>
                 </div>
-                <p>Price: ${coin.current_price.toLocaleString()}</p>
+                <p>Price: {coin.current_price.toLocaleString('et-EE')} €</p>
                 <p className={coin.price_change_percentage_24h >= 0 ? 'positive':'negative'}>
                     {coin.price_change_percentage_24h.toFixed(2)} %
                 </p>
                 <p>
-                    Market Cap: {coin.market_cap.toLocaleString()}
+                    Market Cap: {coin.market_cap.toLocaleString('et-EE')}
                 </p>
             </div>
         </Link>

@@ -24,7 +24,7 @@ const App = () => {
 
         const fetchCoins = async () => {
             try{
-               const response = await fetch(`${API_URL}?vs_currency=usd&order=${sortBy}&per_page=${limit}&page=1&sparkline=false`);
+               const response = await fetch(`${API_URL}?vs_currency=eur&order=${sortBy}&per_page=${limit}&page=1&sparkline=false`);
                // if (!response.ok) {
                //     console.error('Could not fetch coins');
                //     return null;
