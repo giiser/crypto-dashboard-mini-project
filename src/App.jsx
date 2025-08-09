@@ -5,6 +5,7 @@ import AboutPage from "./pages/about";
 
 import {Routes, Route} from "react-router";
 import Header from "./components/Header.jsx";
+import NotFoundPage from "./pages/not-found.jsx";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -54,6 +55,8 @@ const App = () => {
                            error={error}/>}
                 />
                 <Route path="/about" element={<AboutPage />}/>
+                {/*this is the not found page. Has to be the last Route!*/}
+                <Route path="*" element={<NotFoundPage />}/>
             </Routes>
         </>
 
