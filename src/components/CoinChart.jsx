@@ -12,7 +12,7 @@ import {
     TimeScale
 } from "chart.js";
 import 'chartjs-adapter-date-fns';
-
+import {et} from 'date-fns/locale';
 
 ChartJS.register(
     CategoryScale,
@@ -48,7 +48,7 @@ const CoinChart = ({coinId}) => {
                         label: 'Price, EUR',
                         data: prices,
                         fill: true,
-                        borderColor: '007bff',
+                        borderColor: '#007bff',
                         backgroundColor: 'rgba(0, 123, 255, 0.1)',
                         pointRadius: 0,
                         tension: 0.3
@@ -81,6 +81,11 @@ const CoinChart = ({coinId}) => {
                             time: {
                                 unit: 'day', // Each tick on the axis represents a day
                             },
+                            adapters:{
+                                date:{
+                                    locale: et
+                                }
+                            },
                             ticks: {
                                 autoSkip: true, // Skip ticks if there are too many
                                 maxTicksLimit: 7, // Show at most 7 ticks
@@ -88,7 +93,7 @@ const CoinChart = ({coinId}) => {
                         },
                         y: {
                             ticks: {
-                                callback: (value) => `${value.toLocaleString()} €`, // Format numbers like $25,000
+                                callback: (value) => `${value.toLocaleString('ee-ET')} €`, // Format numbers like $25,000
                             },
                         }
                     },
@@ -96,37 +101,5 @@ const CoinChart = ({coinId}) => {
             />
         </div>
     );
-
-    // return (
-    //     <div style={{ marginTop: '30px' }}>
-    //         <Line
-    //             data={chartData}
-    //             options={{
-    //                 responsive: true,
-    //                 plugins: {
-    //                     legend: {display: false},
-    //                     tooltip: {mode: 'index', intersect: false}
-    //                 },
-    //                 scales: {
-    //                     x: {
-    //                         type: 'time',
-    //                         time: {
-    //                             unit: 'day'
-    //                         },
-    //                         ticks: {
-    //                             autoSkip: true,
-    //                             maxTicksLimit: 7
-    //                         }
-    //                     },
-    //                     y: {
-    //                         ticks: {
-    //                             callback: (value) => `${value.toLocaleString('et-EE')}, €`
-    //                         }
-    //                     }
-    //                 }
-    //             }}
-    //         />
-    //     </div>
-    // )
 }
 export default CoinChart;
