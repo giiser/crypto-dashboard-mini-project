@@ -1,13 +1,15 @@
 import {useState, useEffect} from 'react';
+import {Routes, Route} from "react-router";
 
 import HomePage from "./pages/home";
 import AboutPage from "./pages/about";
-
-import {Routes, Route} from "react-router";
 import Header from "./components/Header.jsx";
 import NotFoundPage from "./pages/not-found.jsx";
+import CoinDetailsPage from "./pages/coin-details.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL;
+
+
+const API_URL = import.meta.env.VITE_COINS_API_URL;
 
 const App = () => {
 
@@ -23,10 +25,14 @@ const App = () => {
         const fetchCoins = async () => {
             try{
                const response = await fetch(`${API_URL}?vs_currency=usd&order=${sortBy}&per_page=${limit}&page=1&sparkline=false`);
-               if (!response.ok) throw new Error('Could not fetch coins');
+               // if (!response.ok) {
+               //     console.error('Could not fetch coins');
+               //     return null;
+               // }
                const data = await response.json();
                setCoins(data);
             } catch(err){
+                console.error('Could not fetch coins');
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -55,6 +61,7 @@ const App = () => {
                            error={error}/>}
                 />
                 <Route path="/about" element={<AboutPage />}/>
+                <Route path="/coin/:id" element={<CoinDetailsPage />}/>
                 {/*this is the not found page. Has to be the last Route!*/}
                 <Route path="*" element={<NotFoundPage />}/>
             </Routes>
