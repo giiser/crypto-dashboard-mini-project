@@ -1,5 +1,6 @@
 import {useParams, Link} from "react-router";
 import {useState, useEffect} from "react";
+import Spinner from "../components/Spinner.jsx";
 
 const API_URL = import.meta.env.VITE_COIN_DETAILS_API_URL;
 
@@ -15,7 +16,6 @@ const CoinDetailsPage = () => {
             try {
                 const response = await fetch(`${API_URL}/${id}`);
                 const data = await response.json();
-                console.log(data);
                 setCoin(data);
 
             } catch (err){
@@ -35,7 +35,7 @@ const CoinDetailsPage = () => {
                 {coin ? `${coin.name} (${coin.symbol.toUpperCase()})`:"Coin details"}
             </h1>
 
-            {loading && <p>Loading...</p>}
+            {loading && <Spinner />}
             {error && <div className="error">❌ {error}</div>}
 
             {!loading && !error && (
